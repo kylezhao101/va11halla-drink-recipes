@@ -1,23 +1,36 @@
-import logo from './logo.svg';
 import './App.css';
+import DrinkCard from './components/DrinkCard';
+
+const drinkData = {
+  "drink_id_18": {
+    "Image": 'https://static.wikia.nocookie.net/va11halla/images/8/8d/Piano_Man.png/revision/latest?cb=20170601162912',
+    "Name": "Piano Man",
+    "Flavour": [
+      "Sour"
+    ],
+    "Tags": [
+      "Promo",
+      "Strong"
+    ],
+    "Ingredients": {
+      "Adelhyde": 2,
+      "Bronson Extract": 3,
+      "Powdered Delta": 5,
+      "Flanergide": 5,
+      "Karmotrine": 3
+    },
+    "Preparation": [
+      "on the rocks and mixed"
+    ],
+    "Price": 320,
+    "Quote": "This drink does not represent the opinions of the Bar Pianists Union or its associates."
+  }
+};
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <DrinkCard drink={drinkData['drink_id_18']}/>
     </div>
   );
 }
