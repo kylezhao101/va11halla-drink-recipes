@@ -13,6 +13,9 @@ module.exports = {
         'green-flanergide':'#A6D26D',
         'cyan-karmotrine':'#34FCFC'
       },
+      fontFamily: {
+        body : ['Space Mono']
+      },
     },
   },
   plugins: [],

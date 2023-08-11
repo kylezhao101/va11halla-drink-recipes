@@ -33,22 +33,22 @@ const DrinkCard = ({drink}) => {
         });
 
     return(
-        <div className="drink-card">
+        <div className="drink-card font-body">
             <img src={drink.Image} alt={drink.Name}/>
-            <h2 className="">{drink.Name}</h2>
-            <h3 className="">
+            <h2 className="font-bold text-xl">{drink.Name}</h2>
+            <h3 className="font-bold text-base">
                 {drink.Flavour.join(", ")}, {drink.Tags.join(", ")}
             </h3>
-            <div className="">
+            <div className="text-base mt-4">
                 {ingredientsList}
             </div>
-            <p className="">
+            <p className="text-base mt-2">
                 {drink.Preparation}
             </p>
-            <p className="">
+            <p className="italic text-base mt-4">
                 {drink.Quote}
             </p>
-            <h3 className="">
+            <h3 className="font-bold text-xl">
                 ${drink.Price}
             </h3>
         </div>
