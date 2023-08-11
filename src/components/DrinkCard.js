@@ -18,6 +18,22 @@ const getIngredientColor = (ingredient) => {
     }
 };
 
+const getIngredientBackground = (ingredient) => {
+    switch(ingredient){
+        case "Adelhyde":
+            return "bg-red-adelhyde";
+        case "Bronson Extract":
+            return "bg-yellow-bronson";
+        case "Powdered Delta":
+            return "bg-blue-powdered";
+        case "Flanergide":
+            return "bg-green-flanergide"
+        case  "Karmotrine":
+            return "bg-cyan-karmotrine"
+        default:
+            return "bg-gray";
+    }
+};
 
 const DrinkCard = ({drink}) => {
     const ingredientsList = Object.entries(drink.Ingredients)
@@ -31,6 +47,20 @@ const DrinkCard = ({drink}) => {
                 </div>
             );
         });
+    
+    const ingredientPills = Object.entries(drink.Ingredients)
+        .filter(([ingredient, amount]) => amount > 0)
+        .flatMap(([ingredient, amount]) => {
+            var textColor = getIngredientBackground(ingredient);
+            
+            return Array.from({ length: amount}, (_, index) => (
+                <div
+                    key={`${ingredient}-${index}`}
+                    className={`inline-block h-2 w-5 mr-1 rounded-full ${textColor} `}
+                >
+                </div>
+            ));
+        });
 
     return(
         <div className="drink-card font-body">
@@ -39,7 +69,10 @@ const DrinkCard = ({drink}) => {
             <h3 className="font-bold text-base">
                 {drink.Flavour.join(", ")}, {drink.Tags.join(", ")}
             </h3>
-            <div className="text-base mt-4">
+            <div className="mt-2">
+                {ingredientPills}
+            </div>
+            <div className="text-base mt-2">
                 {ingredientsList}
             </div>
             <p className="text-base mt-2">
