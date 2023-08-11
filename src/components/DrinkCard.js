@@ -63,8 +63,8 @@ const DrinkCard = ({drink}) => {
         });
 
     return(
-        <div className="drink-card font-body">
-            <img src={drink.Image} alt={drink.Name}/>
+        <div className="drink-card font-body w-72 border-2 p-3 flex flex-col">
+            <img className="mx-auto" src={drink.Image} alt={drink.Name}/>
             <h2 className="font-bold text-xl">{drink.Name}</h2>
             <h3 className="font-bold text-base">
                 {drink.Flavour.join(", ")}, {drink.Tags.join(", ")}
@@ -81,7 +81,7 @@ const DrinkCard = ({drink}) => {
             <p className="italic text-base mt-4">
                 {drink.Quote}
             </p>
-            <h3 className="font-bold text-xl">
+            <h3 className="font-bold text-xl mt-4">
                 ${drink.Price}
             </h3>
         </div>
