@@ -39,18 +39,35 @@ const getIngredientBackground = (ingredient) => {
     }
 };
 
-const DrinkCard = ({drink}) => {
-    const ingredientsList = Object.entries(drink.Ingredients)
+const sortIngredients = (ingredients) => {
+    return Object.entries(ingredients)
         .filter(([ingredient, amount]) => amount > 0)
-        .map(([ingredient, amount]) => {
-            const textColor = getIngredientColor(ingredient);
-
-            return(
-                <div key={ingredient} className={`${textColor}`}>
-                    {amount} {ingredient}{" "}
-                </div>
-            );
+        .sort(([ingredientA], [ingredientB]) => {
+            const order = [
+                'Adelhyde',
+                'Bronson Extract',
+                'Powdered Delta',
+                'Flanergide',
+                'Karmotrine',
+                'Optional Karmotrine'
+            ];
+            
+            return order.indexOf(ingredientA) - order.indexOf(ingredientB);
         });
+};
+
+const DrinkCard = ({drink}) => {
+    const sortedIngredients = sortIngredients(drink.Ingredients)
+    
+    const ingredientsList = sortedIngredients.map(([ingredient, amount]) => {
+        const textColor = getIngredientColor(ingredient);
+
+        return(
+            <div key={ingredient} className={`${textColor}`}>
+                {amount} {ingredient}{" "}
+            </div>
+        );
+    });
     
     const ingredientPills = Object.entries(drink.Ingredients)
         .filter(([ingredient, amount]) => amount > 0)
