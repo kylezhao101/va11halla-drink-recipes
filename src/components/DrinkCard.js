@@ -13,6 +13,8 @@ const getIngredientColor = (ingredient) => {
             return "text-green-flanergide"
         case  "Karmotrine":
             return "text-cyan-karmotrine"
+        case "Optional Karmotrine":
+            return "text-cyan-karmotrine"
         default:
             return "text-gray";
     }
@@ -30,6 +32,8 @@ const getIngredientBackground = (ingredient) => {
             return "bg-green-flanergide"
         case  "Karmotrine":
             return "bg-cyan-karmotrine"
+        case "Optional Karmotrine":
+            return "border-2 border-cyan-karmotrine bg-opacity-0"
         default:
             return "bg-gray";
     }
