@@ -69,19 +69,17 @@ const DrinkCard = ({drink}) => {
         );
     });
     
-    const ingredientPills = Object.entries(drink.Ingredients)
-        .filter(([ingredient, amount]) => amount > 0)
-        .flatMap(([ingredient, amount]) => {
-            var textColor = getIngredientBackground(ingredient);
+    const ingredientPills = sortedIngredients.flatMap(([ingredient, amount]) => {
+        var textColor = getIngredientBackground(ingredient);
             
-            return Array.from({ length: amount}, (_, index) => (
-                <div
-                    key={`${ingredient}-${index}`}
-                    className={`inline-block h-2 w-5 mr-1 rounded-full ${textColor} `}
-                >
-                </div>
-            ));
-        });
+        return Array.from({ length: amount}, (_, index) => (
+            <div
+                key={`${ingredient}-${index}`}
+                className={`inline-block h-2 w-5 mr-1 rounded-full ${textColor} `}
+            >   
+            </div>
+        ));
+    });
 
     return(
         <div className="drink-card font-body w-72 border-2 p-3 flex flex-col">
