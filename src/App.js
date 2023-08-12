@@ -1,5 +1,8 @@
 import './App.css';
 import DrinkCard from './components/DrinkCard';
+import React, {useState, useEffect} from 'react';
+import {collection, getDocs} from 'firebase/firestore';
+import {firestore} from './util/firebase'
 
 const drinkData = {
   "drink_id_18": {
@@ -53,10 +56,33 @@ const drinkData = {
 };
 
 function App() {
+
+  const [drinks, setDrinks] = useState([]);
+
+  useEffect(() => {
+    async function fetchDrinks(){
+      const drinksCollection = collection(firestore, 'test-drinks');
+      const drinksSnapshotr = await getDocs(drinksCollection);
+      const fetchedDrinks = [];
+
+      drinksSnapshotr.forEach((drinkDoc) => {
+        const drink = drinkDoc.data();
+        fetchedDrinks.push(drink);
+      });
+
+      setDrinks(fetchedDrinks);
+    }
+
+    fetchDrinks();
+  }, []);
+
   return (
     <div className="App">
-      <DrinkCard drink={drinkData['drink_id_18']}/>
-      <DrinkCard drink={drinkData['drink_id_5']}/>
+      {/* <DrinkCard drink={drinkData['drink_id_18']}/>
+      <DrinkCard drink={drinkData['drink_id_5']}/> */}
+      {drinks.map((drink, index) => (
+        <DrinkCard key={index} drink={drink}/>
+      ))}
     </div>
   );
 }
