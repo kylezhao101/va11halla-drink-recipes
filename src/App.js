@@ -27,11 +27,13 @@ function App() {
 
   return (
     <div className="App">
-      {drinks.map((drink, index) => (
-        <DrinkCard key={index} drink={drink}/>
-      ))}
-      <DrinkCard drink={drinkData['drink_id_5']}/>
-      <DrinkCard drink={drinkData['drink_id_18']}/>
+      <div className='flex gap-2 flex-wrap'>
+        {drinks.map((drink, index) => (
+          <DrinkCard key={index} drink={drink}/>
+        ))}
+        <DrinkCard drink={drinkData['drink_id_5']}/>
+        <DrinkCard drink={drinkData['drink_id_18']}/>
+      </div>
     </div>
   );
 }

@@ -16,6 +16,9 @@ module.exports = {
       fontFamily: {
         body : ['Space Mono']
       },
+      width: {
+        card: '268px'
+      }
     },
   },
   plugins: [],
