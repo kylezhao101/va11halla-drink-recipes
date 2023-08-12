@@ -17,7 +17,8 @@ const drinkData = {
       "Bronson Extract": 3,
       "Powdered Delta": 5,
       "Flanergide": 5,
-      "Karmotrine": 3
+      "Karmotrine": 3,
+      "Optional Karmotrine": false
     },
     "Preparation": [
       "on the rocks and mixed"
@@ -40,7 +41,8 @@ const drinkData = {
       "Bronson Extract": 0,
       "Powdered Delta": 0,
       "Flanergide": 1,
-      "Karmotrine": 'optional'
+      "Karmotrine": 0,
+      "Optional Karmotrine" : true
     },
     "Preparation": [
       "aged and mixed"
