@@ -50,13 +50,31 @@ function App() {
           type = "search"
           placeholder = "search drinks"
       />
-      <div className=''>
-        <button onClick={() => setSelectedFlavour(null)}>All</button>
-        <button onClick={() => setSelectedFlavour("Bitter")}>Bitter</button>
-        <button onClick={() => setSelectedFlavour("Bubbly")}>Bubbly</button>
-        <button onClick={() => setSelectedFlavour("Sour")}>Sour</button>
-        <button onClick={() => setSelectedFlavour("Spicy")}>Spicy</button>
-        <button onClick={() => setSelectedFlavour("Sweet")}>Sweet</button>
+      <div className='flex font-body text-red-interactive'>
+        <div>
+          <input type='radio' id='All' value='All' name='flavour' className='peer hidden' onClick={() => setSelectedFlavour(null)}/>
+          <label for='All' className='block p-2 cursor-pointer hover:bg-cyan-100 select-none text-center peer-checked:bg-red-interactive peer-checked:text-white'>All</label>
+        </div>
+        <div>
+          <input type='radio' id='Bitter' value='Bitter' name='flavour' className='peer hidden' onClick={() => setSelectedFlavour("Bitter")}/>
+          <label for='Bitter' className='block p-2 cursor-pointer hover:bg-cyan-100 select-none text-center peer-checked:bg-red-interactive peer-checked:text-white'>Bitter</label>
+        </div>
+        <div>
+          <input type='radio' id='Bubbly' value='Bubbly' name='flavour' className='peer hidden' onClick={() => setSelectedFlavour("Bubbly")}/>
+          <label for='Bubbly' className='block p-2 cursor-pointer hover:bg-cyan-100 select-none text-center peer-checked:bg-red-interactive peer-checked:text-white'>Bubbly</label>
+        </div>
+        <div>
+          <input type='radio' id='Sour' value='Sour' name='flavour' className='peer hidden' onClick={() => setSelectedFlavour("Sour")}/>
+          <label for='Sour' className='block p-2 cursor-pointer hover:bg-cyan-100 select-none text-center peer-checked:bg-red-interactive peer-checked:text-white'>Sour</label>
+        </div>
+        <div>
+          <input type='radio' id='Spicy' value='Spicy' name='flavour' className='peer hidden' onClick={() => setSelectedFlavour("Spicy")}/>
+          <label for='Spicy' className='block p-2 cursor-pointer hover:bg-cyan-100 select-none text-center peer-checked:bg-red-interactive peer-checked:text-white'>Spicy</label>
+        </div>
+        <div>
+          <input type='radio' id='Sweet' value='Sweet' name='flavour' className='peer hidden' onClick={() => setSelectedFlavour("Sweet")}/>
+          <label for='Sweet' className='block p-2 cursor-pointer hover:bg-cyan-100 select-none text-center peer-checked:bg-red-interactive peer-checked:text-white'>Sweet</label>
+        </div>
       </div>
       <div className='flex gap-2 flex-wrap'>
         {filteredDrinks.map((drink, index) => (

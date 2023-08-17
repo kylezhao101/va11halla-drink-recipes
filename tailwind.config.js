@@ -11,7 +11,8 @@ module.exports = {
         'yellow-bronson':'#FFD230',
         'blue-powdered':'#5E95FF',
         'green-flanergide':'#A6D26D',
-        'cyan-karmotrine':'#34FCFC'
+        'cyan-karmotrine':'#34FCFC',
+        'red-interactive':'#FF1E8A'
       },
       fontFamily: {
         body : ['Space Mono']
