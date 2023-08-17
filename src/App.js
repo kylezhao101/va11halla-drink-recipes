@@ -49,7 +49,8 @@ function App() {
           value = {query}
           onChange = {e => setQuery(e.target.value)}
           type = "search"
-          placeholder = "search drinks"
+          placeholder = "Search drinks"
+          className='red-interactive text-lg font-body border-b-2 focus:outline-none focus:border-b-red-interactive'
       />
       
       <FlavourFilter selectedFlavour={selectedFlavour} setSelectedFlavour={setSelectedFlavour} />
