@@ -10,6 +10,7 @@ function App() {
   const [drinks, setDrinks] = useState([]);
   const [query, setQuery] = useState("");
   const [selectedFlavour, setSelectedFlavour] = useState(null);
+  const [detailedView, setDetailedView] = useState(true);
 
   useEffect(() => {
     async function fetchDrinks(){
@@ -55,9 +56,31 @@ function App() {
       
       <FlavourFilter selectedFlavour={selectedFlavour} setSelectedFlavour={setSelectedFlavour} />
 
+      <div>
+        <input
+          type='radio'
+          id='detailedView'
+          value='detailed'
+          name='cardView'
+          className='peer Hidden'
+          onChange={() => setDetailedView(true)}
+        />
+        <label htmlFor='detailedView'>Detailed view</label>
+        <input
+          type='radio'
+          id='conciseView'
+          value='consise'
+          name='cardView'
+          className='peer Hidden'
+          onChange={() => setDetailedView(false)}
+        />
+        <label htmlFor='conciseView'>Consise</label>
+      </div>
+      <p className="text-base font-body">({filteredDrinks.length})</p>
+
       <div className='flex gap-2 flex-wrap'>
         {filteredDrinks.map((drink, index) => (
-          <DrinkCard key={index} drink={drink}/>
+          <DrinkCard key={index} drink={drink} detailedView={detailedView}/>
         ))}
       </div>
     </div>

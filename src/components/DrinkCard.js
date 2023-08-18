@@ -56,7 +56,7 @@ const sortIngredients = (ingredients) => {
         });
 };
 
-const DrinkCard = ({drink}) => {
+const DrinkCard = ({drink, detailedView}) => {
     const sortedIngredients = sortIngredients(drink.Ingredients)
     
     const ingredientsList = sortedIngredients.map(([ingredient, amount]) => {
@@ -91,15 +91,19 @@ const DrinkCard = ({drink}) => {
             <div className="mt-2">
                 {ingredientPills}
             </div>
-            <div className="text-base mt-2">
+            {detailedView &&(
+                <div className="text-base mt-2">
                 {ingredientsList}
-            </div>
-            <p className="text-base mt-2">
+                </div>
+            )}            
+            <p className="text-base mt-2 mb-4">
                 {drink.Preparation}
             </p>
-            <p className="italic text-base text-slate-500 mt-4 mb-4">
+            {detailedView &&(
+                <p className="italic text-base text-slate-500 mb-4">
                 {drink.Quote}
-            </p>
+                </p>
+            )}
             <h3 className="mt-auto font-bold text-xl">
                 ${drink.Price}
             </h3>
