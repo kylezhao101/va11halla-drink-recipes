@@ -1,6 +1,7 @@
 import './App.css';
 import DrinkCard from './components/DrinkCard';
 import FlavourFilter from './components/FlavourFilter';
+import TypeFilter from './components/TypeFilter';
 import React, {useMemo, useState, useEffect} from 'react';
 import {collection, getDocs} from 'firebase/firestore';
 import {firestore} from './util/firebase'
@@ -10,6 +11,7 @@ function App() {
   const [drinks, setDrinks] = useState([]);
   const [query, setQuery] = useState("");
   const [selectedFlavour, setSelectedFlavour] = useState(null);
+  const [selectedTypes, setSelectedTypes] = useState([]);
   const [detailedView, setDetailedView] = useState(true);
 
   useEffect(() => {
@@ -55,7 +57,8 @@ function App() {
       />
       
       <FlavourFilter selectedFlavour={selectedFlavour} setSelectedFlavour={setSelectedFlavour} />
-
+      <TypeFilter selectedTypes={selectedTypes} setSelectedTypes={setSelectedTypes} />
+      
       <div>
         <input
           type='radio'
