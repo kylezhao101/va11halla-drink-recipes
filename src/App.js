@@ -36,15 +36,14 @@ function App() {
   
     return drinks.filter((drink) => {
       const combinedText = `${drink.Name} ${drink.Flavour.join(' ')} ${drink.Tags.join(' ')} ${drink.Preparation.join(' ')}`;
+      
       const queryMatch = queryWords.every(word => combinedText.toLowerCase().includes(word));
-  
-      if (selectedFlavour) {
-        return queryMatch && drink.Flavour.includes(selectedFlavour);
-      } else {
-        return queryMatch;
-      }
+      const matchesSelectedTypes = selectedTypes.every(type => drink.Tags.includes(type));
+      const matchesSelectedFlavour = !selectedFlavour || drink.Flavour.includes(selectedFlavour);
+
+      return queryMatch && matchesSelectedTypes && matchesSelectedFlavour;
     });
-  }, [drinks, query, selectedFlavour]);
+  }, [drinks, query, selectedFlavour, selectedTypes]);
 
   return (
     <div className="App">
