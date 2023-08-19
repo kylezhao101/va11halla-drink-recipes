@@ -59,25 +59,29 @@ function App() {
       <FlavourFilter selectedFlavour={selectedFlavour} setSelectedFlavour={setSelectedFlavour} />
       <TypeFilter selectedTypes={selectedTypes} setSelectedTypes={setSelectedTypes} />
       
-      <div>
-        <input
-          type='radio'
-          id='detailedView'
-          value='detailed'
-          name='cardView'
-          className='peer hidden'
-          onChange={() => setDetailedView(true)}
-        />
-        <label htmlFor='detailedView'>Detailed view</label>
-        <input
-          type='radio'
-          id='conciseView'
-          value='consise'
-          name='cardView'
-          className='peer hidden'
-          onChange={() => setDetailedView(false)}
-        />
-        <label htmlFor='conciseView'>Consise</label>
+      <div className='flex gap-2 font-body text-red-interactive'>
+        <div>
+          <input
+            type='radio'
+            id='detailed'
+            value='detailed'
+            name='cardView'
+            className='peer hidden'
+            onChange={() => setDetailedView(true)}
+          />
+          <label htmlFor='detailed' className='block p-2 peer-checked:text-white peer-checked:bg-red-interactive'>Detailed</label>
+        </div>
+        <div>
+          <input
+            type='radio'
+            id='concise'
+            value='concise'
+            name='cardView'
+            className='peer hidden'
+            onChange={() => setDetailedView(false)}
+          />
+          <label htmlFor='concise' className='block p-2 peer-checked:text-white peer-checked:bg-red-interactive'>Concise</label>
+        </div>
       </div>
       <p className="text-base font-body">({filteredDrinks.length})</p>
 
