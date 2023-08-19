@@ -65,7 +65,7 @@ function App() {
           id='detailedView'
           value='detailed'
           name='cardView'
-          className='peer Hidden'
+          className='peer hidden'
           onChange={() => setDetailedView(true)}
         />
         <label htmlFor='detailedView'>Detailed view</label>
@@ -74,7 +74,7 @@ function App() {
           id='conciseView'
           value='consise'
           name='cardView'
-          className='peer Hidden'
+          className='peer hidden'
           onChange={() => setDetailedView(false)}
         />
         <label htmlFor='conciseView'>Consise</label>
