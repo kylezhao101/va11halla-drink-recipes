@@ -16,7 +16,7 @@ function App() {
 
   useEffect(() => {
     async function fetchDrinks(){
-      const drinksCollection = collection(firestore, 'test-drinks');
+      const drinksCollection = collection(firestore, 'drinks');
       const drinksSnapshot = await getDocs(drinksCollection);
       const fetchedDrinks = [];
 
