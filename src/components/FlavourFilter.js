@@ -5,7 +5,7 @@ function FlavourFilter({ selectedFlavour, setSelectedFlavour }) {
   const flavours = ["All", "Bitter", "Bubbly", "Sour", "Spicy", "Sweet"];
 
   return (
-    <div className='flex gap-3 font-body text-red-interactive'>
+    <div className='flex flex-wrap gap-2 font-body text-red-interactive'>
       {flavours.map((flavour) => (
         <div key={flavour}>
           <input

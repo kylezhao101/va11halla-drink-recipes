@@ -63,7 +63,7 @@ function App() {
   }, [drinks, query, selectedFlavour, selectedTypes, selectedSort]);
 
   return (
-    <div className="App p-14">
+    <div className="App pl-3 pr-3 lg:pl-14 lg:pr-14 pb-14 pt-14">
       <div className='flex flex-col gap-2'>
         <input
             value = {query}
@@ -72,7 +72,7 @@ function App() {
             placeholder = "Search drinks"
             className='text-lg font-body border-b-2 bg-transparent text-white w-1/2'
         />
-        <div className='flex justify-between items-center mb-5'>
+        <div className='flex gap-4 flex-col lg:flex-row lg:justify-between lg:items-center mb-5'>
           <FlavourFilter selectedFlavour={selectedFlavour} setSelectedFlavour={setSelectedFlavour} />
           <div className='flex w-1/3 justify-between'>
             <div className='flex flex-col'>
@@ -82,8 +82,8 @@ function App() {
           </div>
         </div>
       </div>      
-      <div className='flex'>
-        <div className='flex flex-col gap-2 mr-20'>
+      <div className='flex flex-col lg:flex-row'>
+        <div className='grid grid-cols-3 lg:flex lg:flex-col gap-2 mr-20'>
           <TypeFilter selectedTypes={selectedTypes} setSelectedTypes={setSelectedTypes} />
         </div>
         <div>
