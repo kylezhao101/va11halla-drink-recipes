@@ -3,6 +3,7 @@ import DrinkCard from './components/DrinkCard';
 import FlavourFilter from './components/FlavourFilter';
 import TypeFilter from './components/TypeFilter';
 import CardViewToggle from './components/CardViewToggle';
+import SortToggle from './components/SortToggle';
 import React, {useMemo, useState, useEffect} from 'react';
 import {collection, getDocs} from 'firebase/firestore';
 import {firestore} from './util/firebase'
@@ -16,6 +17,7 @@ function App() {
   const [selectedFlavour, setSelectedFlavour] = useState(null);
   const [selectedTypes, setSelectedTypes] = useState([]);
   const [detailedView, setDetailedView] = useState(true);
+  const [selectedSort, setSelectedSort] = useState('');
 
   useEffect(() => {
     async function fetchDrinks(){
@@ -50,7 +52,8 @@ function App() {
 
   return (
     <div className="App">
-      <div className='flex'>
+      <div className='flex gap-x-11'>
+        
         <div>
           <input
               value = {query}
@@ -62,11 +65,15 @@ function App() {
           
           <FlavourFilter selectedFlavour={selectedFlavour} setSelectedFlavour={setSelectedFlavour} />
         </div>
-        <CardViewToggle detailedView={detailedView} setDetailedView={setDetailedView} />
-      </div>
-      <div>
-          <TypeFilter selectedTypes={selectedTypes} setSelectedTypes={setSelectedTypes} />
+
+        <div>
+          <CardViewToggle detailedView={detailedView} setDetailedView={setDetailedView} />
+          <SortToggle selectedSort={selectedSort} setSelectedSort={setSelectedSort} />
         </div>
+      </div>
+      <div className='flex gap-2'>
+          <TypeFilter selectedTypes={selectedTypes} setSelectedTypes={setSelectedTypes} />
+      </div>
       <p className="text-base font-body text-white">({filteredDrinks.length})</p>
       <div className='flex gap-2 flex-wrap'>
         {filteredDrinks.map((drink, index) => (

@@ -26,23 +26,21 @@ const TypeFilter = ({ selectedTypes = [], setSelectedTypes }) => {
     };
 
     return (
-        <div className='flex gap-2 font-body text-base text-red-interactive'>
-            {types.map((type) => (
-                <div key={type} className='flex items-center'>
-                    <input
-                        type='checkbox'
-                        id={type}
-                        value={type}
-                        checked={selectedTypes.includes(type)}
-                        onChange={() => handleTypeChange(type)}
-                        className='appearance-none w-4 h-4 mr-2 border-2 border-red-interactive checked:bg-red-interactive'
-                    />
-                    <label htmlFor={type} className='cursor-pointer'>
-                        {type}
-                    </label>
-                </div>
-            ))}
-        </div>
+        types.map((type) => (
+            <div key={type} className='flex items-center font-body text-base text-red-interactive'>
+                <input
+                    type='checkbox'
+                    id={type}
+                    value={type}
+                    checked={selectedTypes.includes(type)}
+                    onChange={() => handleTypeChange(type)}
+                    className='appearance-none w-4 h-4 mr-2 border-2 border-red-interactive checked:bg-red-interactive'
+                />
+                <label htmlFor={type} className='cursor-pointer'>
+                    {type}
+                </label>
+            </div>
+        ))
     );
 };
 

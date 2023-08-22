@@ -18,7 +18,7 @@ function FlavourFilter({ selectedFlavour, setSelectedFlavour }) {
           />
           <label
             htmlFor={flavour}
-            className='block w-24 p-1 cursor-pointer select-none border-red-interactive border-2 rounded-full hover:bg-red-interactive hover:bg-opacity-20 hover:shadow-red-interactive hover:shadow-md text-center peer-checked:bg-red-interactive peer-checked:text-slate-950 peer-checked:font-bold duration-100'
+            className='block w-20 p-1 cursor-pointer select-none border-red-interactive border-2 rounded-full hover:bg-red-interactive hover:bg-opacity-20 hover:shadow-red-interactive hover:shadow-md text-center peer-checked:bg-red-interactive peer-checked:text-slate-950 peer-checked:font-bold duration-100'
           >
             {flavour}
           </label>
