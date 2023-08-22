@@ -35,11 +35,11 @@ function App() {
     fetchDrinks();
   }, []);
 
-  const filteredDrinks = useMemo(() => {
+  const sortedFilteredDrinks = useMemo(() => {
     const lowercaseQuery = query.toLowerCase().replace(/[^\w\s]/g, ''); // Remove non-alphanumeric characters
     const queryWords = lowercaseQuery.split(/\s+/); // Split query into words
   
-    return drinks.filter((drink) => {
+    const filteredDrinks = drinks.filter((drink) => {
       const combinedText = `${drink.Name} ${drink.Flavour.join(' ')} ${drink.Tags.join(' ')} ${drink.Preparation.join(' ')}`;
       
       const queryMatch = queryWords.every(word => combinedText.toLowerCase().includes(word));
@@ -48,7 +48,18 @@ function App() {
 
       return queryMatch && matchesSelectedTypes && matchesSelectedFlavour;
     });
-  }, [drinks, query, selectedFlavour, selectedTypes]);
+
+    switch (selectedSort) {
+      case 'name':
+        return [...filteredDrinks].sort((a, b) => a.Name.localeCompare(b.Name));
+      case 'price':
+        return [...filteredDrinks].sort((a, b) => a.Price - b.Price);
+      case 'flavour':
+        return [...filteredDrinks].sort((a, b) => a.Flavour[0].localeCompare(b.Flavour[0]));
+      default:
+        return filteredDrinks;
+    }
+  }, [drinks, query, selectedFlavour, selectedTypes, selectedSort]);
 
   return (
     <div className="App p-14">
@@ -75,9 +86,9 @@ function App() {
           <TypeFilter selectedTypes={selectedTypes} setSelectedTypes={setSelectedTypes} />
         </div>
         <div>
-          <p className="font-body text-2xl text-white">({filteredDrinks.length})</p> 
+          <p className="font-body text-2xl text-white">({sortedFilteredDrinks.length})</p> 
           <div className='flex gap-2 flex-wrap'>
-            {filteredDrinks.map((drink, index) => (
+            {sortedFilteredDrinks.map((drink, index) => (
               <DrinkCard key={index} drink={drink} detailedView={detailedView}/>
             ))}
           </div>
