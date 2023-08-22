@@ -40,12 +40,13 @@ function App() {
     const queryWords = lowercaseQuery.split(/\s+/); // Split query into words
   
     const filteredDrinks = drinks.filter((drink) => {
-      const combinedText = `${drink.Name} ${drink.Flavour.join(' ')} ${drink.Tags.join(' ')} ${drink.Preparation.join(' ')}`;
+      console.log(drink.Ingredients)
+      const ingredientsKeys = Object.keys(drink.Ingredients).filter(key => drink.Ingredients[key] > 0);
+      const combinedText = `${drink.Name} ${drink.Flavour.join(' ')} ${drink.Tags.join(' ')} ${drink.Preparation.join(' ')} ${ingredientsKeys}`;
       
       const queryMatch = queryWords.every(word => combinedText.toLowerCase().includes(word));
       const matchesSelectedTypes = selectedTypes.every(type => drink.Tags.includes(type));
       const matchesSelectedFlavour = !selectedFlavour || drink.Flavour.includes(selectedFlavour);
-
       return queryMatch && matchesSelectedTypes && matchesSelectedFlavour;
     });
 
