@@ -5,7 +5,7 @@ function FlavourFilter({ selectedFlavour, setSelectedFlavour }) {
   const flavours = ["All", "Bitter", "Bubbly", "Sour", "Spicy", "Sweet"];
 
   return (
-    <div className='flex font-body text-red-interactive'>
+    <div className='flex gap-3 font-body text-red-interactive'>
       {flavours.map((flavour) => (
         <div key={flavour}>
           <input
@@ -18,7 +18,7 @@ function FlavourFilter({ selectedFlavour, setSelectedFlavour }) {
           />
           <label
             htmlFor={flavour}
-            className='block p-2 cursor-pointer hover:bg-cyan-100 select-none text-center peer-checked:bg-red-interactive peer-checked:text-white'
+            className='block w-24 p-1 cursor-pointer select-none border-red-interactive border-2 rounded-full hover:bg-red-interactive hover:bg-opacity-20 hover:shadow-red-interactive hover:shadow-md text-center peer-checked:bg-red-interactive peer-checked:text-slate-950 peer-checked:font-bold duration-100'
           >
             {flavour}
           </label>

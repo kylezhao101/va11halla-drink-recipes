@@ -49,43 +49,49 @@ function App() {
 
   return (
     <div className="App">
-      <input
-          value = {query}
-          onChange = {e => setQuery(e.target.value)}
-          type = "search"
-          placeholder = "Search drinks"
-          className='red-interactive text-lg font-body border-b-2 focus:outline-none focus:border-b-red-interactive'
-      />
-      
-      <FlavourFilter selectedFlavour={selectedFlavour} setSelectedFlavour={setSelectedFlavour} />
-      <TypeFilter selectedTypes={selectedTypes} setSelectedTypes={setSelectedTypes} />
-      
-      <div className='flex gap-2 font-body text-red-interactive'>
+      <div className='flex'>
         <div>
           <input
-            type='radio'
-            id='detailed'
-            value='detailed'
-            name='cardView'
-            className='peer hidden'
-            onChange={() => setDetailedView(true)}
+              value = {query}
+              onChange = {e => setQuery(e.target.value)}
+              type = "search"
+              placeholder = "Search drinks"
+              className='text-lg font-body border-b-2 bg-transparent text-white'
           />
-          <label htmlFor='detailed' className='block p-2 peer-checked:text-white peer-checked:bg-red-interactive'>Detailed</label>
+          
+          <FlavourFilter selectedFlavour={selectedFlavour} setSelectedFlavour={setSelectedFlavour} />
         </div>
-        <div>
-          <input
-            type='radio'
-            id='concise'
-            value='concise'
-            name='cardView'
-            className='peer hidden'
-            onChange={() => setDetailedView(false)}
-          />
-          <label htmlFor='concise' className='block p-2 peer-checked:text-white peer-checked:bg-red-interactive'>Concise</label>
+
+        <div className='flex gap-2 font-body'>
+          <p className='text-white'>View</p>
+          <div>
+            <input
+              type='radio'
+              id='detailed'
+              value='detailed'
+              name='cardView'
+              className='peer hidden'
+              onChange={() => setDetailedView(true)}
+            />
+            <label htmlFor='detailed' className='block p-2 text-red-interactive peer-checked:text-white peer-checked:bg-red-interactive'>Detailed</label>
+          </div>
+          <div>
+            <input
+              type='radio'
+              id='concise'
+              value='concise'
+              name='cardView'
+              className='peer hidden'
+              onChange={() => setDetailedView(false)}
+            />
+            <label htmlFor='concise' className='block p-2 text-red-interactive peer-checked:text-white peer-checked:bg-red-interactive'>Concise</label>
+          </div>
         </div>
       </div>
-      <p className="text-base font-body">({filteredDrinks.length})</p>
-
+      <div>
+          <TypeFilter selectedTypes={selectedTypes} setSelectedTypes={setSelectedTypes} />
+        </div>
+      <p className="text-base font-body text-white">({filteredDrinks.length})</p>
       <div className='flex gap-2 flex-wrap'>
         {filteredDrinks.map((drink, index) => (
           <DrinkCard key={index} drink={drink} detailedView={detailedView}/>
