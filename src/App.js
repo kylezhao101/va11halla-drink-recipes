@@ -2,6 +2,7 @@ import './App.css';
 import DrinkCard from './components/DrinkCard';
 import FlavourFilter from './components/FlavourFilter';
 import TypeFilter from './components/TypeFilter';
+import CardViewToggle from './components/CardViewToggle';
 import React, {useMemo, useState, useEffect} from 'react';
 import {collection, getDocs} from 'firebase/firestore';
 import {firestore} from './util/firebase'
@@ -56,37 +57,12 @@ function App() {
               onChange = {e => setQuery(e.target.value)}
               type = "search"
               placeholder = "Search drinks"
-              className='text-lg font-body border-b-2 bg-transparent text-white'
+              className='text-lg font-body border-b-2 bg-transparent text-white w-full'
           />
           
           <FlavourFilter selectedFlavour={selectedFlavour} setSelectedFlavour={setSelectedFlavour} />
         </div>
-
-        <div className='flex gap-2 font-body'>
-          <p className='text-white'>View</p>
-          <div>
-            <input
-              type='radio'
-              id='detailed'
-              value='detailed'
-              name='cardView'
-              className='peer hidden'
-              onChange={() => setDetailedView(true)}
-            />
-            <label htmlFor='detailed' className='block p-2 text-red-interactive peer-checked:text-white peer-checked:bg-red-interactive'>Detailed</label>
-          </div>
-          <div>
-            <input
-              type='radio'
-              id='concise'
-              value='concise'
-              name='cardView'
-              className='peer hidden'
-              onChange={() => setDetailedView(false)}
-            />
-            <label htmlFor='concise' className='block p-2 text-red-interactive peer-checked:text-white peer-checked:bg-red-interactive'>Concise</label>
-          </div>
-        </div>
+        <CardViewToggle detailedView={detailedView} setDetailedView={setDetailedView} />
       </div>
       <div>
           <TypeFilter selectedTypes={selectedTypes} setSelectedTypes={setSelectedTypes} />
