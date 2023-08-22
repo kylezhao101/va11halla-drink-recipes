@@ -65,16 +65,17 @@ function App() {
           
           <FlavourFilter selectedFlavour={selectedFlavour} setSelectedFlavour={setSelectedFlavour} />
         </div>
-
-        <div>
-          <CardViewToggle detailedView={detailedView} setDetailedView={setDetailedView} />
+        <div className=''> 
+            <TypeFilter selectedTypes={selectedTypes} setSelectedTypes={setSelectedTypes} />
+          </div>
+      </div>
+      <div className='flex justify-between items-center'>
+        <p className="font-body text-2xl text-white">({filteredDrinks.length})</p> 
+        <div className='flex w-1/2 flex-col'>
           <SortToggle selectedSort={selectedSort} setSelectedSort={setSelectedSort} />
+          <CardViewToggle detailedView={detailedView} setDetailedView={setDetailedView} />
         </div>
       </div>
-      <div className='flex gap-2'>
-          <TypeFilter selectedTypes={selectedTypes} setSelectedTypes={setSelectedTypes} />
-      </div>
-      <p className="text-base font-body text-white">({filteredDrinks.length})</p>
       <div className='flex gap-2 flex-wrap'>
         {filteredDrinks.map((drink, index) => (
           <DrinkCard key={index} drink={drink} detailedView={detailedView}/>
