@@ -6,6 +6,8 @@ import React, {useMemo, useState, useEffect} from 'react';
 import {collection, getDocs} from 'firebase/firestore';
 import {firestore} from './util/firebase'
 
+document.body.style.backgroundColor = "#070C15";
+
 function App() {
 
   const [drinks, setDrinks] = useState([]);

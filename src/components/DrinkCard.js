@@ -82,10 +82,10 @@ const DrinkCard = ({drink, detailedView}) => {
     });
 
     return(
-        <div className="drink-card font-body w-card border-2 p-3 flex flex-col">
-            <img className="mx-auto mt-2 mb-2" src={drink.Image} alt={drink.Name}/>
-            <h2 className="font-bold text-xl">{drink.Name}</h2>
-            <h3 className="font-bold text-base">
+        <div className="drink-card font-body w-card border-2 border-gray-600 p-3 flex flex-col">
+            <img className="mx-auto mt-2 mb-2 object-contain max-h-28" src={drink.Image} alt={drink.Name}/>
+            <h2 className="font-bold text-xl text-white text-opacity-90">{drink.Name}</h2>
+            <h3 className="font-bold text-base text-white text-opacity-90">
                 {drink.Flavour.join(", ")}, {drink.Tags.join(", ")}
             </h3>
             <div className="mt-2">
@@ -96,15 +96,15 @@ const DrinkCard = ({drink, detailedView}) => {
                 {ingredientsList}
                 </div>
             )}            
-            <p className="text-base mt-2 mb-4">
+            <p className="text-base mt-2 mb-4 text-white text-opacity-90">
                 {drink.Preparation}
             </p>
             {detailedView &&(
-                <p className="italic text-base text-slate-500 mb-4">
+                <p className="italic text-base text-white text-opacity-90 mb-4">
                 {drink.Quote}
                 </p>
             )}
-            <h3 className="mt-auto font-bold text-xl">
+            <h3 className="mt-auto font-bold text-xl text-white text-opacity-90">
                 ${drink.Price}
             </h3>
         </div>
