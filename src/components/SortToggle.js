@@ -16,6 +16,7 @@ function SortToggle({ selectedSort, setSelectedSort }) {
             value={option.value}
             name='sort'
             className='peer hidden'
+            checked={selectedSort === option.value}
             onChange={() => setSelectedSort(option.value)}
           />
           <label

@@ -17,7 +17,7 @@ function App() {
   const [selectedFlavour, setSelectedFlavour] = useState(null);
   const [selectedTypes, setSelectedTypes] = useState([]);
   const [detailedView, setDetailedView] = useState(true);
-  const [selectedSort, setSelectedSort] = useState('');
+  const [selectedSort, setSelectedSort] = useState('name');
 
   useEffect(() => {
     async function fetchDrinks(){
