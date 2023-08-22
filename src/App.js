@@ -51,35 +51,37 @@ function App() {
   }, [drinks, query, selectedFlavour, selectedTypes]);
 
   return (
-    <div className="App">
-      <div className='flex gap-x-11'>
-        
-        <div>
-          <input
-              value = {query}
-              onChange = {e => setQuery(e.target.value)}
-              type = "search"
-              placeholder = "Search drinks"
-              className='text-lg font-body border-b-2 bg-transparent text-white w-full'
-          />
-          
+    <div className="App p-14">
+      <div className='flex flex-col gap-2'>
+        <input
+            value = {query}
+            onChange = {e => setQuery(e.target.value)}
+            type = "search"
+            placeholder = "Search drinks"
+            className='text-lg font-body border-b-2 bg-transparent text-white w-1/2'
+        />
+        <div className='flex justify-between items-center mb-5'>
           <FlavourFilter selectedFlavour={selectedFlavour} setSelectedFlavour={setSelectedFlavour} />
-        </div>
-        <div className=''> 
-            <TypeFilter selectedTypes={selectedTypes} setSelectedTypes={setSelectedTypes} />
+          <div className='flex w-1/3 justify-between'>
+            <div className='flex flex-col'>
+              <SortToggle selectedSort={selectedSort} setSelectedSort={setSelectedSort} />
+              <CardViewToggle detailedView={detailedView} setDetailedView={setDetailedView} />
+            </div>
           </div>
-      </div>
-      <div className='flex justify-between items-center'>
-        <p className="font-body text-2xl text-white">({filteredDrinks.length})</p> 
-        <div className='flex w-1/2 flex-col'>
-          <SortToggle selectedSort={selectedSort} setSelectedSort={setSelectedSort} />
-          <CardViewToggle detailedView={detailedView} setDetailedView={setDetailedView} />
         </div>
-      </div>
-      <div className='flex gap-2 flex-wrap'>
-        {filteredDrinks.map((drink, index) => (
-          <DrinkCard key={index} drink={drink} detailedView={detailedView}/>
-        ))}
+      </div>      
+      <div className='flex'>
+        <div className='flex flex-col gap-2 mr-20'>
+          <TypeFilter selectedTypes={selectedTypes} setSelectedTypes={setSelectedTypes} />
+        </div>
+        <div>
+          <p className="font-body text-2xl text-white">({filteredDrinks.length})</p> 
+          <div className='flex gap-2 flex-wrap'>
+            {filteredDrinks.map((drink, index) => (
+              <DrinkCard key={index} drink={drink} detailedView={detailedView}/>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
