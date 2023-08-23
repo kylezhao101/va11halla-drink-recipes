@@ -95,7 +95,6 @@ function App() {
             handleToggle={handleToggle}
             selectedTypes={selectedTypes}
             setSelectedTypes={setSelectedTypes}
-            className='lg:hidden'
           />
           <div className='hidden lg:flex lg:flex-col gap-2 mr-20'>
                 <TypeFilter selectedTypes={selectedTypes} setSelectedTypes={setSelectedTypes} />
