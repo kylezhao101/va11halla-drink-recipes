@@ -20,12 +20,6 @@ function App() {
   const [detailedView, setDetailedView] = useState(true);
   const [selectedSort, setSelectedSort] = useState('name');
 
-  const [isChecked, setIsChecked] = useState(false);
-
-  const handleToggle = () => {
-    setIsChecked(!isChecked);
-  };
-
   useEffect(() => {
     async function fetchDrinks(){
       const drinksCollection = collection(firestore, 'drinks');
@@ -91,8 +85,6 @@ function App() {
       </div>
       <div className='flex flex-col lg:flex-row'>
           <TypeDropdown
-            isChecked={isChecked}
-            handleToggle={handleToggle}
             selectedTypes={selectedTypes}
             setSelectedTypes={setSelectedTypes}
           />
