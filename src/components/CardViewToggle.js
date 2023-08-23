@@ -12,6 +12,7 @@ function CardViewToggle({detailedView, setDetailedView}){
               value='detailed'
               name='cardView'
               className='peer hidden'
+              checked={detailedView}
               onChange={() => setDetailedView(true)}
             />
             <label htmlFor='detailed' className='block cursor-pointer text-red-interactive  peer-checked:text-white duration-100'>Detailed</label>
@@ -23,6 +24,7 @@ function CardViewToggle({detailedView, setDetailedView}){
               value='concise'
               name='cardView'
               className='peer hidden'
+              checked={!detailedView}
               onChange={() => setDetailedView(false)}
             />
             <label htmlFor='concise' className='block cursor-pointer text-red-interactive  peer-checked:text-white duration-100'>Concise</label>
