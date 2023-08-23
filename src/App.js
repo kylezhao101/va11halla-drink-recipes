@@ -4,6 +4,7 @@ import FlavourFilter from './components/FlavourFilter';
 import TypeFilter from './components/TypeFilter';
 import CardViewToggle from './components/CardViewToggle';
 import SortToggle from './components/SortToggle';
+import TypeDropdown from './components/TypeDropdown';
 import React, {useMemo, useState, useEffect} from 'react';
 import {collection, getDocs} from 'firebase/firestore';
 import {firestore} from './util/firebase'
@@ -18,6 +19,12 @@ function App() {
   const [selectedTypes, setSelectedTypes] = useState([]);
   const [detailedView, setDetailedView] = useState(true);
   const [selectedSort, setSelectedSort] = useState('name');
+
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleToggle = () => {
+    setIsChecked(!isChecked);
+  };
 
   useEffect(() => {
     async function fetchDrinks(){
@@ -63,16 +70,16 @@ function App() {
   }, [drinks, query, selectedFlavour, selectedTypes, selectedSort]);
 
   return (
-    <div className="App pl-3 pr-3 lg:pl-14 lg:pr-14 pb-14 pt-14">
+    <div className="App pl-4 pr-4 lg:pl-14 lg:pr-14 pb-14 pt-14">
       <div className='flex flex-col gap-2'>
         <input
             value = {query}
             onChange = {e => setQuery(e.target.value)}
             type = "text"
             placeholder = "Search drinks"
-            className='text-lg font-body border-b-2 border-red-interactive bg-transparent text-white w-1/2 outline-none'
+            className='text-lg font-body border-b-2 border-red-interactive bg-transparent text-white w-full lg:w-1/2 outline-none'
         />
-        <div className='flex gap-4 flex-col lg:flex-row lg:justify-between lg:items-center mb-5'>
+        <div className='flex gap-4 flex-col lg:flex-row lg:justify-between lg:items-center lg:mb-5'>
           <FlavourFilter selectedFlavour={selectedFlavour} setSelectedFlavour={setSelectedFlavour} />
           <div className='flex w-1/3 justify-between'>
             <div className='flex flex-col'>
@@ -81,12 +88,19 @@ function App() {
             </div>
           </div>
         </div>
-      </div>      
+      </div>
       <div className='flex flex-col lg:flex-row'>
-        <div className='grid grid-cols-3 lg:flex lg:flex-col gap-2 mr-20'>
-          <TypeFilter selectedTypes={selectedTypes} setSelectedTypes={setSelectedTypes} />
-        </div>
-        <div>
+          <TypeDropdown
+            isChecked={isChecked}
+            handleToggle={handleToggle}
+            selectedTypes={selectedTypes}
+            setSelectedTypes={setSelectedTypes}
+            className='lg:hidden'
+          />
+          <div className='hidden lg:flex lg:flex-col gap-2 mr-20'>
+                <TypeFilter selectedTypes={selectedTypes} setSelectedTypes={setSelectedTypes} />
+              </div>
+          <div>
           <p className="font-body text-2xl text-white">({sortedFilteredDrinks.length})</p> 
           <div className='flex gap-2 flex-wrap'>
             {sortedFilteredDrinks.map((drink, index) => (
