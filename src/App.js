@@ -68,9 +68,9 @@ function App() {
         <input
             value = {query}
             onChange = {e => setQuery(e.target.value)}
-            type = "search"
+            type = "text"
             placeholder = "Search drinks"
-            className='text-lg font-body border-b-2 bg-transparent text-white w-1/2'
+            className='text-lg font-body border-b-2 border-red-interactive bg-transparent text-white w-1/2 outline-none'
         />
         <div className='flex gap-4 flex-col lg:flex-row lg:justify-between lg:items-center mb-5'>
           <FlavourFilter selectedFlavour={selectedFlavour} setSelectedFlavour={setSelectedFlavour} />
