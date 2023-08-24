@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../App.css';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
 import { auth } from '../util/firebase';
 
 const Signup = () => {
@@ -13,13 +13,12 @@ const Signup = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    await createUserWithEmailAndPassword(auth, email, password)
+    createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // Signed in
         const user = userCredential.user;
-        console.log(user);
-        //navigate("/login")
-        // ...
+        sendEmailVerification(user);
+        auth.signOut();
+        alert('confimation email sent')
       })
       .catch((error) => {
         const errorCode = error.code;
