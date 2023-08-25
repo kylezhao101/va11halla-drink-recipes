@@ -1,5 +1,4 @@
 import React, {useMemo, useState, useEffect} from 'react';
-import Navbar from '../components/NavBar';
 import DrinkCard from '../components/DrinkCard';
 import FlavourFilter from '../components/FlavourFilter';
 import TypeFilter from '../components/TypeFilter';
@@ -65,7 +64,6 @@ function HomePage() {
 
   return (
     <div className="pl-4 pr-4 lg:pl-14 lg:pr-14 pb-14 pt-7">
-      <Navbar/>
       <div className='flex flex-col gap-2'>
         <input
             value = {query}

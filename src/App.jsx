@@ -1,14 +1,20 @@
 import React from 'react';
 import './App.css';
 import HomePage from '../src/pages/HomePage';
-import { BrowserRouter as Router} from 'react-router-dom';
+import AuthPage from '../src/pages/AuthPage';
+import NavBar from './components/NavBar';
+import { Route, Routes} from 'react-router-dom';
 
 function App() {
   return (
     <div className="App">
-      <Router>
-        <HomePage />
-      </Router>
+      <NavBar/>
+      <div>
+        <Routes>
+          <Route path = '/' element = {<HomePage/>}/>
+          <Route path = '/authPage' element = {<AuthPage/>}/>
+        </Routes>
+      </div>
     </div>
   );
 }
