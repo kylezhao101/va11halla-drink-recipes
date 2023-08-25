@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import '../App.css';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
-import { auth } from '../util/firebase';
+import { GoogleAuthProvider, createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
+import { auth, provider } from '../util/firebase';
+import { signInWithPopup } from 'firebase/auth';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -25,7 +26,21 @@ const Signup = () => {
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
       });
-  }
+  };
+
+  const callGoogleSignIn = () => {
+    signInWithPopup(auth, provider).then((result) => {
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken;
+      const user = result.user;
+    }).catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      const email = error.customData.email;
+      const credential = GoogleAuthProvider.credentialFromError(error);
+    });
+
+  };
 
   return (
     <form className='font-body'>
@@ -55,8 +70,11 @@ const Signup = () => {
         />
       </div>
 
-      <button type="submit" onClick={onSubmit} className='text-lg text-red-interactive block p-1 pl-3 pr-3 cursor-pointer select-none border-red-interactive border-2 rounded-full hover:bg-red-interactive hover:bg-opacity-20 hover:shadow-red-interactive hover:shadow-md text-center peer-checked:bg-red-interactive peer-checked:text-slate-950 peer-checked:font-bold duration-100'>
+      <button type="submit" onClick={onSubmit} className='text-lg text-red-interactive block p-1 pl-3 pr-3 cursor-pointer select-none border-red-interactive border-2 rounded-full hover:bg-red-interactive hover:bg-opacity-20 hover:shadow-red-interactive hover:shadow-md text-center peer-checked:bg-red-interactive peer-checked:text-slate-950 peer-checked:font-bold duration-100 mb-5'>
         Sign up
+      </button>
+      <button type='submit' onClick={callGoogleSignIn} className='text-red-interactive text-lg'>
+        Sign in with Google
       </button>
     </form>
   );
