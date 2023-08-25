@@ -63,8 +63,8 @@ function HomePage() {
   }, [drinks, query, selectedFlavour, selectedTypes, selectedSort]);
 
   return (
-    <div className="pl-4 pr-4 lg:pl-14 lg:pr-14 pb-14 pt-7">
-      <div className='flex flex-col gap-2 sticky top-0 bg-dark-blue'>
+    <div className="pl-4 pr-4 lg:pl-14 lg:pr-14 pb-14">
+      <div className='pt-5 flex flex-col gap-2 sticky top-0 bg-dark-blue'>
         <input
             value = {query}
             onChange = {e => setQuery(e.target.value)}

@@ -28,21 +28,22 @@ const Signup = () => {
   }
 
   return (
-    <form className='bg-white'>
-      <div>
-        <label htmlFor="email-address">Email address</label>
+    <form className='font-body'>
+      <div className='flex flex-col mb-5'>
+        <label htmlFor="email-address" className='text-lg text-red-interactive'>Email</label>
         <input
           type="email"
           label="Email address"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-          placeholder="Email address"
+          placeholder="example@email.com"
+          className='text-lg font-body border-b-2 border-red-interactive bg-transparent text-white outline-none'
         />
       </div>
 
-      <div>
-        <label htmlFor="password">Password</label>
+      <div className='flex flex-col mb-5'>
+        <label htmlFor="password" className='text-lg text-red-interactive'>Password</label>
         <input
           type="password"
           label="Create password"
@@ -50,10 +51,11 @@ const Signup = () => {
           onChange={(e) => setPassword(e.target.value)}
           required
           placeholder="Password"
+          className='text-lg font-body border-b-2 border-red-interactive bg-transparent text-white outline-none'
         />
       </div>
 
-      <button type="submit" onClick={onSubmit}>
+      <button type="submit" onClick={onSubmit} className='text-lg text-red-interactive block p-1 pl-3 pr-3 cursor-pointer select-none border-red-interactive border-2 rounded-full hover:bg-red-interactive hover:bg-opacity-20 hover:shadow-red-interactive hover:shadow-md text-center peer-checked:bg-red-interactive peer-checked:text-slate-950 peer-checked:font-bold duration-100'>
         Sign up
       </button>
     </form>
