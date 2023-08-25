@@ -4,7 +4,7 @@ import '../App.css';
 
 export default function NavBar(){
   return (
-    <nav className="flex justify-between items-center mb-4 font-body">
+    <nav className="flex justify-between items-center mb-4 font-body lg:pl-14 lg:pr-14 pt-4">
       <Link to='/' className='text-white text-lg'>
         B.T.C. Recipe Book
       </Link>

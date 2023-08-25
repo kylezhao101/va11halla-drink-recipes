@@ -64,7 +64,7 @@ function HomePage() {
 
   return (
     <div className="pl-4 pr-4 lg:pl-14 lg:pr-14 pb-14 pt-7">
-      <div className='flex flex-col gap-2'>
+      <div className='flex flex-col gap-2 sticky top-0 bg-dark-blue'>
         <input
             value = {query}
             onChange = {e => setQuery(e.target.value)}
@@ -83,10 +83,12 @@ function HomePage() {
         </div>
       </div>
       <div className='flex flex-col lg:flex-row'>
-          <TypeDropdown
-            selectedTypes={selectedTypes}
-            setSelectedTypes={setSelectedTypes}
-          />
+          <div className=''>
+            <TypeDropdown
+              selectedTypes={selectedTypes}
+              setSelectedTypes={setSelectedTypes}
+            />
+          </div>
           <div className='hidden lg:flex lg:flex-col gap-2 mr-20'>
                 <TypeFilter selectedTypes={selectedTypes} setSelectedTypes={setSelectedTypes} />
               </div>

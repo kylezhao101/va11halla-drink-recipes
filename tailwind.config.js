@@ -12,7 +12,8 @@ module.exports = {
         'blue-powdered':'#5E95FF',
         'green-flanergide':'#A6D26D',
         'cyan-karmotrine':'#34FCFC',
-        'red-interactive':'#FF1E8A'
+        'red-interactive':'#FF1E8A',
+        'dark-blue':'#070C15'
       },
       fontFamily: {
         body : ['Space Mono']
