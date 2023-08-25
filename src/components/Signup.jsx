@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../App.css';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { GoogleAuthProvider, createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
+import { GoogleAuthProvider, createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth, provider } from '../util/firebase';
 import { signInWithPopup } from 'firebase/auth';
 
@@ -23,9 +23,6 @@ const Signup = () => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        sendEmailVerification(user);
-        auth.signOut();
-        alert('confimation email sent')
       })
       .catch((error) => {
         const errorCode = error.code;
