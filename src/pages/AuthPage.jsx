@@ -1,10 +1,10 @@
-import Signup from '../components/Signup';
+import AuthForm from "../components/AuthForm";
 
 function AuthPage() {
 
     return (
         <>
-         <Signup />
+         <AuthForm />
         </>
 
     );
