@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import { Link, useMatch, useResolvedPath } from 'react-router-dom';
 import '../App.css';
 import { UserContext } from '../context/UserContext';
@@ -23,14 +23,17 @@ export default function NavBar() {
 
       <ul>
         {currentUser ? (
-          <div className='flex gap-5 text-lg'>
-            <div className='text-red-interactive'>
+          <div className='flex gap-5'>
+            <div className='text-red-interactive text-lg'>
               <p>{currentUser.email}</p>
+              <button onClick={handleLogout} className='text-red-interactive text-sm'>
+                Logout
+              </button>
             </div>
-            <button onClick={handleLogout} className='text-red-interactive'>
-              Logout
-            </button>
-            </div>
+            {currentUser.photoURL && (
+              <img src={currentUser.photoURL} alt="User Profile" className='w-8 h-8 rounded-full' />
+            )}
+          </div>
         ) : (
           <CustomLink to="/authPage" className="text-red-interactive text-lg mr-4">Login/Signup</CustomLink>
         )}
