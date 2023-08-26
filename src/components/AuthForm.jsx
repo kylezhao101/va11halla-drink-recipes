@@ -33,7 +33,6 @@ const AuthForm = () => {
                     const errorCode = error.code;
                     const errorMessage = error.message;
                     setErrorMessage(errorCode);
-                    //console.log(errorCode, errorMessage);
                 });
         } else {
             signInWithEmailAndPassword(auth, email, password)
@@ -53,6 +52,7 @@ const AuthForm = () => {
             const credential = GoogleAuthProvider.credentialFromResult(result);
             const token = credential.accessToken;
             const user = result.user;
+            console.log(user)
         }).catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;

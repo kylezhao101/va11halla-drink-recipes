@@ -40,7 +40,6 @@ function HomePage() {
     const queryWords = lowercaseQuery.split(/\s+/); // Split query into words
   
     const filteredDrinks = drinks.filter((drink) => {
-      console.log(drink.Ingredients)
       const ingredientsKeys = Object.keys(drink.Ingredients).filter(key => drink.Ingredients[key] > 0);
       const combinedText = `${drink.Name} ${drink.Flavour.join(' ')} ${drink.Tags.join(' ')} ${drink.Preparation.join(' ')} ${ingredientsKeys}`;
       
