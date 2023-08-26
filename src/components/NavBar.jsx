@@ -1,17 +1,10 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { Link, useMatch, useResolvedPath } from 'react-router-dom';
 import '../App.css';
-import { auth } from '../util/firebase';
+import { UserContext } from '../context/UserContext';
 
 export default function NavBar() {
-  const user = auth.currentUser;
-  console.log(user)
-  if (user !== null) {
-    const displayName = user.displayName;
-    const email = user.email;
-    const photoURL = user.photoURL;
-    const emailVerified = user.emailVerified;
-  }
+  const currentUser = useContext(UserContext);
 
   return (
     <nav className="flex justify-between items-center mb-4 font-body lg:pl-14 lg:pr-14 pt-4">
@@ -20,10 +13,12 @@ export default function NavBar() {
       </Link>
 
       <ul>
-        {user ? (
-          <div className='text-red-interactive text-lg'>
-            {user.email}
-          </div>
+        {currentUser ? (
+          <>
+            <div className='text-red-interactive text-lg'>
+              <p>{currentUser.email}</p>
+            </div>
+          </>
         ) : (
           <CustomLink to="/authPage" className="text-red-interactive text-lg mr-4">Login/Signup</CustomLink>
         )}
