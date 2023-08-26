@@ -26,8 +26,8 @@ const AuthForm = () => {
         }
         if (isSigningUp) {
             createUserWithEmailAndPassword(auth, email, password)
-                .then((userCredential) => {
-                    const user = userCredential.user;
+                .then(() => {
+                    navigate('/');
                 })
                 .catch((error) => {
                     const errorCode = error.code;
@@ -36,8 +36,8 @@ const AuthForm = () => {
                 });
         } else {
             signInWithEmailAndPassword(auth, email, password)
-                .then((userCredential) => {
-                    const user = userCredential.user;
+                .then(() => {
+                    navigate('/');
                 })
                 .catch((error) => {
                     const errorCode = error.code;

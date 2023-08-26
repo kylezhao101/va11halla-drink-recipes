@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
 import { auth } from '../util/firebase';
-import userEvent from '@testing-library/user-event';
 
 export const UserContext = createContext();
 
