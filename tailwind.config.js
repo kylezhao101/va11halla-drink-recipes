@@ -19,8 +19,8 @@ module.exports = {
         body : ['Space Mono']
       },
       width: {
-        card: '268px'
-      }
+        card: '268px',
+      },
     },
   },
   plugins: [],

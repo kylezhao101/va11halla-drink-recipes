@@ -93,7 +93,7 @@ function HomePage() {
               </div>
           <div>
           <p className="font-body text-2xl text-white">({sortedFilteredDrinks.length})</p> 
-          <div className='flex gap-2 flex-wrap'>
+          <div className='flex flex-wrap '>
             {sortedFilteredDrinks.map((drink, index) => (
               <DrinkCard key={index} drink={drink} detailedView={detailedView}/>
             ))}
