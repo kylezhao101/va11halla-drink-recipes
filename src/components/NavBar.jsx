@@ -16,7 +16,7 @@ export default function NavBar() {
   }
 
   return (
-    <nav className="flex justify-between mb-4 font-body lg:pl-14 lg:pr-14 pt-4">
+    <nav className="flex justify-between mb-4 font-body pl-4 pr-4 lg:pl-14 lg:pr-14 pt-4">
       <Link to='/' className='text-white text-lg'>
         B.T.C. Recipe Book
       </Link>
@@ -35,7 +35,7 @@ export default function NavBar() {
             )}
           </div>
         ) : (
-          <CustomLink to="/authPage" className="text-red-interactive text-lg mr-4">Login/Signup</CustomLink>
+          <CustomLink to="/authPage" className="text-red-interactive text-lg">Login/Signup</CustomLink>
         )}
       </ul>
 
