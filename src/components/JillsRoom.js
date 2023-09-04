@@ -6,7 +6,7 @@ import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 
 export default function JillsRoom(props) {
-  const { nodes, materials } = useGLTF("../assets/va11cleaned.glb");
+  const { nodes, materials } = useGLTF("/assets/va11cleaned.glb");
   return (
     <group {...props} dispose={null}>
       <mesh
@@ -18,4 +18,4 @@ export default function JillsRoom(props) {
   );
 }
 
-useGLTF.preload("../assets/va11cleaned.glb");
+useGLTF.preload("/va11cleaned.glb");
