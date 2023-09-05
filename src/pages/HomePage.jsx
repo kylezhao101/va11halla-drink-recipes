@@ -1,12 +1,14 @@
-import React, {useMemo, useState, useEffect} from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import DrinkCard from '../components/DrinkCard';
 import FlavourFilter from '../components/FlavourFilter';
 import TypeFilter from '../components/TypeFilter';
 import CardViewToggle from '../components/CardViewToggle';
 import SortToggle from '../components/SortToggle';
 import TypeDropdown from '../components/TypeDropdown';
-import {collection, getDocs} from 'firebase/firestore';
-import {firestore} from '../util/firebase'
+import { collection, getDocs } from 'firebase/firestore';
+import { firestore } from '../util/firebase'
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css'
 
 document.body.style.backgroundColor = "#070C15";
 
@@ -18,9 +20,11 @@ function HomePage() {
   const [selectedTypes, setSelectedTypes] = useState([]);
   const [detailedView, setDetailedView] = useState(true);
   const [selectedSort, setSelectedSort] = useState('name');
+  const [isLoading, setIsLoading] = useState(true);
+
 
   useEffect(() => {
-    async function fetchDrinks(){
+    async function fetchDrinks() {
       const drinksCollection = collection(firestore, 'drinks');
       const drinksSnapshot = await getDocs(drinksCollection);
       const fetchedDrinks = [];
@@ -31,6 +35,7 @@ function HomePage() {
       });
 
       setDrinks(fetchedDrinks);
+      setIsLoading(false);
     }
     fetchDrinks();
   }, []);
@@ -38,11 +43,11 @@ function HomePage() {
   const sortedFilteredDrinks = useMemo(() => {
     const lowercaseQuery = query.toLowerCase().replace(/[^\w\s]/g, ''); // Remove non-alphanumeric characters
     const queryWords = lowercaseQuery.split(/\s+/); // Split query into words
-  
+
     const filteredDrinks = drinks.filter((drink) => {
       const ingredientsKeys = Object.keys(drink.Ingredients).filter(key => drink.Ingredients[key] > 0);
       const combinedText = `${drink.Name} ${drink.Flavour.join(' ')} ${drink.Tags.join(' ')} ${drink.Preparation.join(' ')} ${ingredientsKeys}`;
-      
+
       const queryMatch = queryWords.every(word => combinedText.toLowerCase().includes(word));
       const matchesSelectedTypes = selectedTypes.every(type => drink.Tags.includes(type));
       const matchesSelectedFlavour = !selectedFlavour || drink.Flavour.includes(selectedFlavour);
@@ -65,11 +70,11 @@ function HomePage() {
     <div className="pl-4 pr-4 lg:pl-14 lg:pr-14 pb-14 min-h-screen">
       <div className='pt-5 flex flex-col gap-2 sticky top-0 bg-dark-blue'>
         <input
-            value = {query}
-            onChange = {e => setQuery(e.target.value)}
-            type = "text"
-            placeholder = "Search drinks"
-            className='text-lg font-body border-b-2 border-red-interactive bg-transparent text-white w-full lg:w-1/2 outline-none'
+          value={query}
+          onChange={e => setQuery(e.target.value)}
+          type="text"
+          placeholder="Search drinks"
+          className='text-lg font-body border-b-2 border-red-interactive bg-transparent text-white w-full lg:w-1/2 outline-none'
         />
         <div className='flex gap-4 flex-col lg:flex-row lg:justify-between lg:items-center lg:mb-5'>
           <FlavourFilter selectedFlavour={selectedFlavour} setSelectedFlavour={setSelectedFlavour} />
@@ -82,21 +87,38 @@ function HomePage() {
         </div>
       </div>
       <div className='flex flex-col lg:flex-row'>
-          <div className=''>
-            <TypeDropdown
-              selectedTypes={selectedTypes}
-              setSelectedTypes={setSelectedTypes}
-            />
-          </div>
-          <div className='hidden lg:flex lg:flex-col gap-2 mr-20'>
-                <TypeFilter selectedTypes={selectedTypes} setSelectedTypes={setSelectedTypes} />
-              </div>
-          <div>
-          <p className="font-body text-2xl text-white">({sortedFilteredDrinks.length})</p> 
+        <div className=''>
+          <TypeDropdown
+            selectedTypes={selectedTypes}
+            setSelectedTypes={setSelectedTypes}
+          />
+        </div>
+        <div className='hidden lg:flex lg:flex-col gap-2 mr-20'>
+          <TypeFilter selectedTypes={selectedTypes} setSelectedTypes={setSelectedTypes} />
+        </div>
+        <div>
+          <p className="font-body text-2xl text-white">({sortedFilteredDrinks.length})</p>
           <div className='flex flex-wrap'>
-            {sortedFilteredDrinks.map((drink, index) => (
-              <DrinkCard key={index} drink={drink} detailedView={detailedView}/>
-            ))}
+
+            {isLoading ? (
+              <div className='w-card'>
+                <SkeletonTheme baseColor='#070C15' highlightColor='#FF1E8A'>
+                <Skeleton height={200} />
+                <Skeleton height={20} />
+                <Skeleton height={20} />
+                <Skeleton height={20} />
+                <Skeleton height={20} />
+                <Skeleton height={40} />
+                <Skeleton height={20} />
+                <Skeleton height={40} />
+                </SkeletonTheme>
+              </div>
+            ) : (
+              // Render actual drink cards once data is loaded
+              sortedFilteredDrinks.map((drink, index) => (
+                <DrinkCard key={index} drink={drink} detailedView={detailedView} />
+              ))
+            )}
           </div>
         </div>
       </div>

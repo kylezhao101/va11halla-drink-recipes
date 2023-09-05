@@ -82,7 +82,7 @@ const DrinkCard = ({drink, detailedView}) => {
     });
 
     return(
-        <div className="drink-card font-body w-full sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/4 2xl:w-1/5 border-2 border-gray-600 p-3 flex flex-col"> 
+        <div className="font-body w-full sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/4 2xl:w-1/5 border-2 border-gray-600 p-3 flex flex-col"> 
             <img className="mx-auto mt-2 mb-2 object-contain max-h-28" src={drink.Image} alt={drink.Name}/>
             <h2 className="font-bold text-xl text-white text-opacity-90">{drink.Name}</h2>
             <h3 className="font-bold text-base text-white text-opacity-90">
