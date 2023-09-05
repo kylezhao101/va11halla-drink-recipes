@@ -6,13 +6,19 @@ import { Stats, OrbitControls } from '@react-three/drei'
 import { Effects } from "@react-three/drei";
 
 function AuthPage() {
-    const target = [0,4,0];
-    const cameraPosition = [8,7,-6];
+    const target = [0, 4, 0];
+    const cameraPosition = [8, 7, -6];
     return (
         <div className="flex">
-            <AuthForm />
+            <div className='w-1/3 p-4 lg:p-14'>
+                <AuthForm />
+            </div>
             <div className="h-screen w-screen">
-                <Canvas antialias={true} pixelRatio={[1, 2]} rotation={[30, 0, 0]} camera={{fov:70, position: cameraPosition}}>
+                <Canvas 
+                    antialias={true}
+                    pixelRatio={[1, 2]}
+                    rotation={[30, 0, 0]}
+                    camera={{ fov: 70, position: cameraPosition }}>
                     <Effects antialias={true} />
                     <Suspense fallback={null}>
                         <JillsRoom />
