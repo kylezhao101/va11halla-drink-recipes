@@ -62,7 +62,7 @@ function HomePage() {
   }, [drinks, query, selectedFlavour, selectedTypes, selectedSort]);
 
   return (
-    <div className="pl-4 pr-4 lg:pl-14 lg:pr-14 pb-14">
+    <div className="pl-4 pr-4 lg:pl-14 lg:pr-14 pb-14 min-h-screen">
       <div className='pt-5 flex flex-col gap-2 sticky top-0 bg-dark-blue'>
         <input
             value = {query}
@@ -93,7 +93,7 @@ function HomePage() {
               </div>
           <div>
           <p className="font-body text-2xl text-white">({sortedFilteredDrinks.length})</p> 
-          <div className='flex flex-wrap '>
+          <div className='flex flex-wrap'>
             {sortedFilteredDrinks.map((drink, index) => (
               <DrinkCard key={index} drink={drink} detailedView={detailedView}/>
             ))}

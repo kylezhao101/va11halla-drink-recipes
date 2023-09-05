@@ -11,6 +11,7 @@ function App() {
   return (
     <div className="App">
       <UserProvider>
+        <div className='min-h-screen'>
         <NavBar/>
         <div>
           <Routes>
@@ -19,6 +20,7 @@ function App() {
           </Routes>
         </div>
         <Footer/>
+        </div>
       </UserProvider>
     </div>
   );
