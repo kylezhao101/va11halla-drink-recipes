@@ -12,24 +12,25 @@ const AuthForm = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
+    const [message, setMessage] = useState('');
     const [isSigningUp, setIsSigningUp] = useState(false);
     const [isRessettingPassword, setIsResettingPassword] = useState(false);
-    const [resetEmail, setResetEmail] = useState('');
 
     const toggleIsSigningUp = () => {
         setIsSigningUp(!isSigningUp);
+        setIsResettingPassword(false);
     };
 
     const toggleIsRessettingPassword = () => {
         setIsResettingPassword(!isRessettingPassword);
+        setMessage('');
     };
 
     const onSubmit = async (e) => {
         e.preventDefault();
 
         if (isSigningUp && password.length < 6) {
-            setErrorMessage('Password must be at least 6 characters long');
+            setMessage('Password must be at least 6 characters long');
             return;
         }
         if (isSigningUp) {
@@ -40,7 +41,7 @@ const AuthForm = () => {
                 .catch((error) => {
                     const errorCode = error.code;
                     const errorMessage = error.message;
-                    setErrorMessage(errorCode);
+                    setMessage(errorCode);
                 });
         } else {
             signInWithEmailAndPassword(auth, email, password)
@@ -50,12 +51,20 @@ const AuthForm = () => {
                 .catch((error) => {
                     const errorCode = error.code;
                     const errorMessage = error.message;
-                    setErrorMessage(errorCode);
+                    setMessage(errorCode);
                 })
         }
 
         if(isRessettingPassword) {
-            sendPasswordResetEmail(auth,email);
+            sendPasswordResetEmail(auth,email)
+                .then(() => {
+                    setMessage('Password reset email sent!');
+                    console.log('success')
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    setMessage(errorCode);
+                });
         }
     };
 
@@ -79,9 +88,6 @@ const AuthForm = () => {
         <form className='font-body'>
             {isRessettingPassword ? (
                 <>
-                    <button type='submit' onClick={toggleIsRessettingPassword} className='text-red-interactive text-lg mt-5'>
-                        Sign in
-                    </button>
                     <div className='flex flex-col mb-5'>
                         <label htmlFor="email-address" className='text-lg text-red-interactive'>Email</label>
                         <input
@@ -96,6 +102,10 @@ const AuthForm = () => {
                     </div>
                     <button type="submit" onClick={onSubmit} className='text-lg text-red-interactive block p-1 pl-3 pr-3 cursor-pointer select-none border-red-interactive border-2 rounded-full hover:bg-red-interactive hover:bg-opacity-20 hover:shadow-red-interactive hover:shadow-md text-center peer-checked:bg-red-interactive peer-checked:text-slate-950 peer-checked:font-bold duration-100'>
                         Send Email Reset
+                    </button>
+                    {message && <p className="text-white">{message}</p>}
+                    <button type='submit' onClick={toggleIsRessettingPassword} className='text-red-interactive text-base mt-5'>
+                        Back to sign in
                     </button>
                 </>
             ) : (
@@ -162,16 +172,16 @@ const AuthForm = () => {
                             <p className="text-white">Password must be at least 6 characters long</p>
                         )}
                     </div>
-
+                            
                     <button type="submit" onClick={onSubmit} className='text-lg text-red-interactive block p-1 pl-3 pr-3 cursor-pointer select-none border-red-interactive border-2 rounded-full hover:bg-red-interactive hover:bg-opacity-20 hover:shadow-red-interactive hover:shadow-md text-center peer-checked:bg-red-interactive peer-checked:text-slate-950 peer-checked:font-bold duration-100'>
                         {isSigningUp ? 'Sign Up' : 'Sign In'}
                     </button>
-                    {errorMessage && <p className="text-red-600">{errorMessage}</p>}
-                    <button type='submit' onClick={toggleIsRessettingPassword} className='text-red-interactive text-lg mt-5'>
-                        Forgot Password?
-                    </button>
                     <button type='submit' onClick={callGoogleSignIn} className='text-red-interactive text-lg mt-5'>
                         Sign in with Google
+                    </button>
+                    {message && <p className="text-red-600">{message}</p>}
+                    <button type='submit' onClick={toggleIsRessettingPassword} className='block text-red-interactive text-base mt-5'>
+                        Forgot Password?
                     </button>
                 </>
             )}
