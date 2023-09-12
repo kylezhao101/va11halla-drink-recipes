@@ -103,14 +103,14 @@ function HomePage() {
             {isLoading ? (
               <div className='w-card'>
                 <SkeletonTheme baseColor='#070C15' highlightColor='#FF1E8A'>
-                <Skeleton height={200} />
-                <Skeleton height={20} />
-                <Skeleton height={20} />
-                <Skeleton height={20} />
-                <Skeleton height={20} />
-                <Skeleton height={40} />
-                <Skeleton height={20} />
-                <Skeleton height={40} />
+                  <Skeleton height={200} />
+                  <Skeleton height={20} />
+                  <Skeleton height={20} />
+                  <Skeleton height={20} />
+                  <Skeleton height={20} />
+                  <Skeleton height={40} />
+                  <Skeleton height={20} />
+                  <Skeleton height={40} />
                 </SkeletonTheme>
               </div>
             ) : (

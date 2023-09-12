@@ -26,10 +26,10 @@ export default function NavBar() {
           <div className='flex gap-5'>
             <div className='text-red-interactive text-lg'>
               <p>{currentUser.email}</p>
-              <button onClick={handleLogout} className='text-red-interactive text-sm'>
-                Logout
-              </button>
             </div>
+            <button onClick={handleLogout} className='text-red-interactive text-sm'>
+                Logout
+            </button>
             {currentUser.photoURL && (
               <img src={currentUser.photoURL} alt="User Profile" className='w-8 h-8 rounded-full' />
             )}
