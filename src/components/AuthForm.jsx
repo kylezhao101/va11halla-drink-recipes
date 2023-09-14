@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import '../App.css';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { GoogleAuthProvider, createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth, provider } from '../util/firebase';
 import { signInWithPopup, signInWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
+import { firestore } from '../util/firebase';
 
 auth.useDeviceLanguage();
 
@@ -35,10 +37,15 @@ const AuthForm = () => {
         }
         if (isSigningUp) {
             createUserWithEmailAndPassword(auth, email, password)
-                .then(() => {
-                    navigate('/');
+                .then((auth) => {
+                    console.log(auth.user.uid)
+                    const newId = auth.user.uid;
+                    setDoc(doc(firestore,'users', newId), {
+                        Favourites: []
+                    })
                 })
                 .catch((error) => {
+                    console.log(error)
                     const errorCode = error.code;
                     const errorMessage = error.message;
                     setMessage(errorCode);
@@ -55,8 +62,8 @@ const AuthForm = () => {
                 })
         }
 
-        if(isRessettingPassword) {
-            sendPasswordResetEmail(auth,email)
+        if (isRessettingPassword) {
+            sendPasswordResetEmail(auth, email)
                 .then(() => {
                     setMessage('Password reset email sent!');
                     console.log('success')
@@ -172,7 +179,7 @@ const AuthForm = () => {
                             <p className="text-white">Password must be at least 6 characters long</p>
                         )}
                     </div>
-                            
+
                     <button type="submit" onClick={onSubmit} className='text-lg text-red-interactive block p-1 pl-3 pr-3 cursor-pointer select-none border-red-interactive border-2 rounded-full hover:bg-red-interactive hover:bg-opacity-20 hover:shadow-red-interactive hover:shadow-md text-center peer-checked:bg-red-interactive peer-checked:text-slate-950 peer-checked:font-bold duration-100'>
                         {isSigningUp ? 'Sign Up' : 'Sign In'}
                     </button>
