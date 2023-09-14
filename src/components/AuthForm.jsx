@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { GoogleAuthProvider, createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth, provider } from '../util/firebase';
 import { signInWithPopup, signInWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';
-import { doc, setDoc } from 'firebase/firestore';
+import { collection, doc, setDoc } from 'firebase/firestore';
 import { firestore } from '../util/firebase';
 
 auth.useDeviceLanguage();
@@ -38,11 +38,21 @@ const AuthForm = () => {
         if (isSigningUp) {
             createUserWithEmailAndPassword(auth, email, password)
                 .then((auth) => {
-                    console.log(auth.user.uid)
                     const newId = auth.user.uid;
-                    setDoc(doc(firestore,'users', newId), {
-                        Favourites: []
-                    })
+                    const userRef = collection('users').doc(newId);
+
+                    userRef.get()
+                        .then((docSnapshot) => {
+                            if (docSnapshot.exists()) {
+                                return;
+                            }
+                            else {
+                                setDoc(doc(firestore, 'users', newId), {
+                                    Favourites: []
+                                })
+                            }
+                        })
+                    navigate('/');
                 })
                 .catch((error) => {
                     console.log(error)
@@ -77,10 +87,23 @@ const AuthForm = () => {
 
     const callGoogleSignIn = () => {
         signInWithPopup(auth, provider).then((result) => {
-            const credential = GoogleAuthProvider.credentialFromResult(result);
-            const token = credential.accessToken;
-            const user = result.user;
-            console.log(user)
+            // const credential = GoogleAuthProvider.credentialFromResult(result);
+            // const token = credential.accessToken;
+            // const user = result.user;
+            const newId = auth.user.uid;
+            const userRef = collection('users').doc(newId);
+
+            userRef.get()
+                .then((docSnapshot) => {
+                    if (docSnapshot.exists()) {
+                        return;
+                    }
+                    else {
+                        setDoc(doc(firestore, 'users', newId), {
+                            Favourites: []
+                        })
+                    }
+                })
             navigate('/');
         }).catch((error) => {
             const errorCode = error.code;
