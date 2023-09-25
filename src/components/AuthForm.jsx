@@ -30,58 +30,37 @@ const AuthForm = () => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-
+    
         if (isSigningUp && password.length < 6) {
             setMessage('Password must be at least 6 characters long');
             return;
         }
-        if (isSigningUp) {
-            createUserWithEmailAndPassword(auth, email, password)
-                .then((auth) => {
-                    const newId = auth.user.uid;
-                    const userRef = collection('users').doc(newId);
-
-                    userRef.get()
-                        .then((docSnapshot) => {
-                            if (docSnapshot.exists()) {
-                                return;
-                            }
-                            else {
-                                setDoc(doc(firestore, 'users', newId), {
-                                    Favourites: []
-                                })
-                            }
-                        })
-                    navigate('/');
-                })
-                .catch((error) => {
-                    console.log(error)
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-                    setMessage(errorCode);
-                });
-        } else {
-            signInWithEmailAndPassword(auth, email, password)
-                .then(() => {
-                    navigate('/');
-                })
-                .catch((error) => {
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-                    setMessage(errorCode);
-                })
-        }
-
-        if (isRessettingPassword) {
-            sendPasswordResetEmail(auth, email)
-                .then(() => {
-                    setMessage('Password reset email sent!');
-                    console.log('success')
-                })
-                .catch((error) => {
-                    const errorCode = error.code;
-                    setMessage(errorCode);
-                });
+    
+        try {
+            if (isSigningUp) {
+                const authResult = await createUserWithEmailAndPassword(auth, email, password);
+                const newId = authResult.user.uid;
+                const userRef = doc(firestore, 'users', newId);
+                
+                const docSnapshot = await userRef.get();
+                if (!docSnapshot.exists()) {
+                    await setDoc(userRef, {
+                        Favourites: []
+                    });
+                }
+            } else {
+                await signInWithEmailAndPassword(auth, email, password);
+            }
+    
+            if (isRessettingPassword) {
+                await sendPasswordResetEmail(auth, email);
+                setMessage('Password reset email sent!');
+            }
+    
+            navigate('/');
+        } catch (error) {
+            const errorCode = error.code;
+            setMessage(errorCode);
         }
     };
 
