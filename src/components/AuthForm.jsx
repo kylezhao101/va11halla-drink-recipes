@@ -37,21 +37,12 @@ const AuthForm = () => {
         }
         if (isSigningUp) {
             createUserWithEmailAndPassword(auth, email, password)
-                .then((auth) => {
-                    const newId = auth.user.uid;
-                    const userRef = collection('users').doc(newId);
-
-                    userRef.get()
-                        .then((docSnapshot) => {
-                            if (docSnapshot.exists()) {
-                                return;
-                            }
-                            else {
-                                setDoc(doc(firestore, 'users', newId), {
-                                    Favourites: []
-                                })
-                            }
-                        })
+                .then((result) => {
+                    const userID = result.user.uid;
+                
+                    setDoc(doc(firestore, 'users', userID), {
+                        Favourites: []
+                    });
                     navigate('/');
                 })
                 .catch((error) => {
