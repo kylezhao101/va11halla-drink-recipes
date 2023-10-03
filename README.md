@@ -1,70 +1,60 @@
-# Getting Started with Create React App
+# Va11halla recipes site
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Va11halla Drink Recipes is a web application that provides a collection of delicious drink recipes in the game "VA-11 Hall-A: Cyberpunk Bartender Action". You can find the game's Steam page [here](https://store.steampowered.com/app/447530/VA11_HallA_Cyberpunk_Bartender_Action/).
 
-## Available Scripts
+This project uses:
+- React
+- Firebase (Firestore and Firebase Authentication)
+- React Three Fiber
+- GLTF component generated from [gltf.pmnd.rs](https://gltf.pmnd.rs/) by Poimandres
+  
+## Roadmap
 
-In the project directory, you can run:
+- Implement drink favoriting system for registered users and sort by popularity function
+- Add responsiveness for login and registration page
+- Optimize loading speed (especially gtlf model component)
 
-### `npm start`
+## Installation
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```sh
+# Clone the Repository
+git clone https://github.com/kylezhao101/va11halla-drink-recipes.git
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+# Navigate to the Project Directory
+cd va11halla-drink-recipes
 
-### `npm test`
+# Install Dependencies
+npm install
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Start the development server to run the application locally.
+npm run start
+```
 
-### `npm run build`
+## Firebase Configuration
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The drink recipes for this application were sourced from the [Va11halla Drinktionary](https://va11halla.fandom.com/wiki/Drinktionary) website.
+The scraped drink recipes data was subsequently transferred and stored in a Firestore database.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+To set up Firebase for the Va11halla Drink Recipes application, follow these steps:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. **Create a Firebase Project:**
+   - Go to the [Firebase Console](https://console.firebase.google.com/).
+   - Create a new Firebase project if you don't have one already.
 
-### `npm run eject`
+2. **Access Firebase Configuration:**
+   - In your Firebase project, navigate to "Project Settings" to access your Firebase configuration.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+3. **Replace Configuration in `src/firebase.js`:**
+   - Open the `src/firebase.js` file in your project.
+   - Replace the placeholders in the `firebaseConfig` object with your Firebase project's configuration. Your `firebaseConfig` object should look like this:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```javascript
+const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_AUTH_DOMAIN",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_STORAGE_BUCKET",
+    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+    appId: "YOUR_APP_ID"
+};
+```
