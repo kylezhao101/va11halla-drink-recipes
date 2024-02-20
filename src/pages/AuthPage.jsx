@@ -15,8 +15,6 @@ function AuthPage() {
       </div>
       <div className="h-screen w-screen">
         <Canvas
-          antialias={true}
-          pixelRatio={[1, 2]}
           rotation={[30, 0, 0]}
           camera={{ fov: 70, position: cameraPosition }}
         >
