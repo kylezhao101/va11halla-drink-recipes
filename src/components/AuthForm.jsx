@@ -95,6 +95,7 @@ const AuthForm = () => {
         setDoc(doc(firestore, "users", userID), {
           Favourites: [],
         });
+        navigate("/");
       })
       .catch((error) => {
         // Handle Errors here.
