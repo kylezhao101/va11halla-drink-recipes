@@ -87,16 +87,14 @@ function HomePage() {
         </div>
       </div>
       <div className='flex flex-col lg:flex-row'>
-        <div className=''>
           <TypeDropdown
             selectedTypes={selectedTypes}
             setSelectedTypes={setSelectedTypes}
           />
-        </div>
-        <div className='hidden lg:flex lg:flex-col gap-2 mr-20'>
+        <div className='hidden lg:flex lg:flex-col gap-2 pr-20'>
           <TypeFilter selectedTypes={selectedTypes} setSelectedTypes={setSelectedTypes} />
         </div>
-        <div>
+        <div className='w-full'>
           <p className="font-body text-2xl text-white">({sortedFilteredDrinks.length})</p>
           <div className='flex flex-wrap'>
 

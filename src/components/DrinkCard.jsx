@@ -102,7 +102,7 @@ const DrinkCard = ({ drink, detailedView }) => {
                     {ingredientsList}
                 </div>
             )}
-            <p className="text-base mt-2 mb-4 text-white text-opacity-90">
+            <p className="text-base font-bold mt-2 mb-4 text-white text-opacity-90">
                 {drink.Preparation}
             </p>
             {detailedView && (

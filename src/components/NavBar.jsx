@@ -1,51 +1,55 @@
-import React, { useContext } from 'react';
-import { Link, useMatch, useResolvedPath } from 'react-router-dom';
-import '../App.css';
-import { UserContext } from '../context/UserContext';
-import { auth } from '../util/firebase';
-import { signOut } from 'firebase/auth';
+import React, { useContext } from "react";
+import { Link, useMatch, useResolvedPath } from "react-router-dom";
+import "../App.css";
+import { UserContext } from "../context/UserContext";
+import { auth } from "../util/firebase";
+import { signOut } from "firebase/auth";
 
 export default function NavBar() {
   const currentUser = useContext(UserContext);
 
   const handleLogout = () => {
-    signOut(auth)
-      .catch((error) => {
-        console.log(error)
-      });
-  }
+    signOut(auth).catch((error) => {
+      console.log(error);
+    });
+  };
 
   return (
     <nav className="flex justify-between mb-4 font-body pl-4 pr-4 lg:pl-14 lg:pr-14 pt-4">
-      <Link to='/' className='text-white text-lg'>
+      <Link to="/" className="text-white text-lg">
         B.T.C. Recipe Book
       </Link>
 
       <ul>
         {currentUser ? (
-          <div className='flex gap-5'>
-            <div className='text-red-interactive text-lg'>
-              <p>{currentUser.email}</p>
-            </div>
-            <button onClick={handleLogout} className='text-red-interactive text-sm'>
-                Logout
+          <div className="flex gap-5">
+            <button
+              onClick={handleLogout}
+              className="text-red-interactive text-sm"
+            >
+              Logout
             </button>
             {currentUser.photoURL && (
-              <img src={currentUser.photoURL} alt="User Profile" className='w-8 h-8 rounded-full' />
+              <img
+                src={currentUser.photoURL}
+                alt="User Profile"
+                className="w-8 h-8 rounded-full"
+              />
             )}
           </div>
         ) : (
-          <CustomLink to="/authPage" className="text-red-interactive text-lg">Login/Signup</CustomLink>
+          <CustomLink to="/authPage" className="text-red-interactive text-lg">
+            Login/Signup
+          </CustomLink>
         )}
       </ul>
-
     </nav>
   );
-};
+}
 
 function CustomLink({ to, children, ...props }) {
-  const resolvedPath = useResolvedPath(to)
-  const isActive = useMatch({ path: resolvedPath.pathname, end: true })
+  const resolvedPath = useResolvedPath(to);
+  const isActive = useMatch({ path: resolvedPath.pathname, end: true });
 
   return (
     <li className={isActive ? "active" : ""}>
@@ -53,5 +57,5 @@ function CustomLink({ to, children, ...props }) {
         {children}
       </Link>
     </li>
-  )
+  );
 }
