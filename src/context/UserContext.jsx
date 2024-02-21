@@ -7,7 +7,7 @@ export function useUser() {
     return useContext(UserContext);
 }
 
-export function UserProvider({children}) {
+export function UserProvider({ children }) {
     const [currentUser, setCurrentUser] = useState();
 
     auth.onAuthStateChanged((user) => {
@@ -15,7 +15,7 @@ export function UserProvider({children}) {
     });
 
     return (
-        <UserContext.Provider value = {currentUser}>
+        <UserContext.Provider value={currentUser}>
             {children}
         </UserContext.Provider>
     );

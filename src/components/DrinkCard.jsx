@@ -1,8 +1,9 @@
 import DrinkPill from "./DrinkPill";
-import { updateDoc, doc, increment } from "firebase/firestore";
+import { updateDoc, doc, getDoc, increment } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { firestore } from "../util/firebase";
 import { useUser } from "../context/UserContext";
+import { useFavourites } from "../context/FavouritesContext";
 
 const getIngredientColor = (ingredient) => {
   switch (ingredient) {
@@ -42,7 +43,10 @@ const sortIngredients = (ingredients) => {
 
 const DrinkCard = ({ drink, detailedView }) => {
   const currentUser = useUser();
-  const [favouritesCount, setFavouritesCount] = useState(drink.Favourites);
+  const [favouritesCount, setFavouritesCount] = useState(drink.Favourites || 0);
+
+  const { favourites, addFavourite, removeFavourite } = useFavourites();
+  const isFavourited = favourites.includes(drink.id);
 
   const sortedIngredients = sortIngredients(drink.Ingredients);
   const ingredientsList = sortedIngredients.map(([ingredient, amount]) => {
@@ -66,15 +70,20 @@ const DrinkCard = ({ drink, detailedView }) => {
       return;
     }
     const drinkRef = doc(firestore, "drinks", drink.id);
-    try {
-      await updateDoc(drinkRef, {
-        Favourites: increment(1),
-      });
-      // Increment the local state to reflect the change immediately on the UI
-      setFavouritesCount(favouritesCount + 1);
-      console.log("Favourites count incremented for drink:", drink.id);
-    } catch (error) {
-      console.error("Error incrementing Favourites count:", error);
+
+    if (isFavourited) {
+      await removeFavourite(drink.id);
+      // Use increment with a negative number to decrement
+      await updateDoc(drinkRef, { Favourites: increment(-1) });
+    } else {
+      await addFavourite(drink.id);
+      await updateDoc(drinkRef, { Favourites: increment(1) });
+    }
+
+    // Optionally re-fetch the favourites count to ensure UI consistency
+    const drinkSnapshot = await getDoc(drinkRef);
+    if (drinkSnapshot.exists()) {
+      setFavouritesCount(drinkSnapshot.data().Favourites);
     }
   };
 
@@ -95,7 +104,8 @@ const DrinkCard = ({ drink, detailedView }) => {
             d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"
           />
         </svg>
-        <p className="text-base pl-2 text-gray-500">{favouritesCount}</p>
+        {favouritesCount > 0 && <p className="text-base pl-2 text-gray-500">{favouritesCount}</p>}
+
       </button>
       <img
         className="mx-auto mt-2 mb-2 object-contain max-h-28"
