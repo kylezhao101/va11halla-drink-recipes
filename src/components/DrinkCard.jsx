@@ -92,7 +92,7 @@ const DrinkCard = ({ drink, detailedView }) => {
       <button type="button" className="flex" onClick={handleIncrementFavorites}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          fill="none"
+          fill={isFavourited ? "gray" : "none"}
           viewBox="0 0 24 24"
           strokeWidth="1"
           stroke="gray"
